@@ -11,6 +11,8 @@ DEBUG = env.bool('DEBUG')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS')
 
+# Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -18,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'camera.apps.CameraConfig',
 ]
 
 MIDDLEWARE = [
@@ -29,14 +30,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'global_login_required.GlobalLoginRequiredMiddleware',
 ]
 
-PUBLIC_PATHS = [
-    '/accounts/*',
-]
-
-ROOT_URLCONF = 'xperiaweb.urls'
+ROOT_URLCONF = 'line_bot.urls'
 
 TEMPLATES = [
     {
@@ -54,14 +50,22 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'xperiaweb.wsgi.application'
+WSGI_APPLICATION = 'line_bot.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# Password validation
+# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -78,15 +82,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Internationalization
+# https://docs.djangoproject.com/en/4.2/topics/i18n/
+
 LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
 USE_I18N = True
 USE_TZ = True
 
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR.parent, 'assets'),
-]
 STATIC_ROOT = '/var/www/seima-kinjo.com/html/static'
 STATIC_URL = '/static/'
 
