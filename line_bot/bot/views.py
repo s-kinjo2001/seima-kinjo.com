@@ -14,6 +14,6 @@ def index(request):
         for event in events:
             message = event['message']
             reply_token = event['replyToken']
-            line_message = LineMessage(message_creater.create_message(message['text']))
+            line_message = LineMessage(message_creator.create_message(message['text']))
             line_message.reply(reply_token)
         return HttpResponse("ok")
