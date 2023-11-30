@@ -25,15 +25,14 @@ line_bot_api = LineBotApi(channel_access_token=ACCESSTOKEN)
 handler = WebhookHandler(channel_secret=LINE_ACCESS_SECRET)
 
 def callback(request):
-    body = body = request.body.decode('utf-8')
-    hash = hmac.new(LINE_ACCESS_SECRET.encode('utf-8'),
-        body.encode('utf-8'), hashlib.sha256).digest()
+    # signatureの取得
+    signature = request.META['X_LINE_SIGNATURE']
+    body = request.body.decode('utf-8')
     try:
-        signature = base64.b64encode(hash)
+        handler.handle(body, signature)
     except InvalidSignatureError:
-        HttpResponseForbidden()
-    # handleの処理を終えればOK
-    return HttpResponse('OK', status=200)
+        return HttpResponseForbidden()
+    return HttpResponse(status=200)
 
 
 # メッセージイベントの場合の処理
