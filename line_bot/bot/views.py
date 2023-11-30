@@ -26,7 +26,7 @@ handler = WebhookHandler(channel_secret=LINE_ACCESS_SECRET)
 
 def callback(request):
     # signatureの取得
-    signature = request.META['X-LINE-SIGNATURE']
+    signature = request.headers['X-Line-Signature']
     body = request.body.decode('utf-8')
     try:
         handler.handle(body, signature)
