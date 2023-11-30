@@ -1,7 +1,7 @@
 from django.http import HttpResponseForbidden, HttpResponse
 import environ
 from pathlib import Path
-
+from django.views.decorators.csrf import csrf_exempt
 from linebot.exceptions import InvalidSignatureError
 from linebot import LineBotApi, WebhookHandler
 
@@ -24,6 +24,7 @@ line_bot_api = LineBotApi(channel_access_token=ACCESSTOKEN)
 
 handler = WebhookHandler(channel_secret=LINE_ACCESS_SECRET)
 
+@csrf_exempt
 def callback(request):
     # signatureの取得
     signature = request.headers['X-Line-Signature']
