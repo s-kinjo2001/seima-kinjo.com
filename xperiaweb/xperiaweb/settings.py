@@ -114,18 +114,23 @@ LOGGING = {
      },
      'handlers': {
          'debug-console': {
-             'level': 'DEBUG',
+             'level': 'ERROR',
              'filters': ['require_debug_true'],  # settings.DEBUG=Falseなら全て破棄
              'class': 'logging.StreamHandler',
              'formatter': 'verbose'
          },
          'prod-console': {
-             'level': 'INFO',
+             'level': 'ERROR',
              'filters': ['require_debug_false'],  # settings.DEBUG=Trueなら全て破棄
              'class': 'logging.StreamHandler',
              'formatter': 'standard'
-             'filename':'log/debug.log'
-         }
+         },
+         'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'log/debug.log'),
+            'formatter': 'verbose',
+        },
      },
      'loggers': {
          '': {  # 'root' の代わり。全てキャッチする
