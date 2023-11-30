@@ -1,10 +1,8 @@
-def create_single_text_message(message):
-    if message == 'ありがとう':
-        message = 'どういたしまして！'
-    test_message = [
+def create_message(msg):
+    message = [
                 {
                     'type': 'text',
-                    'text': message
+                    'text': msg
                 }
             ]
-    return test_message
+    return message
