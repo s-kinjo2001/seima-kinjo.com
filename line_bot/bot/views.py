@@ -4,7 +4,11 @@ from pathlib import Path
 
 from linebot.exceptions import InvalidSignatureError
 from linebot import LineBotApi, WebhookHandler
-import os
+
+import base64
+import hashlib
+import hmac
+
 from linebot.models import (
     MessageEvent,
     TextMessage ,ImageMessage, AudioMessage
@@ -21,13 +25,11 @@ line_bot_api = LineBotApi(channel_access_token=ACCESSTOKEN)
 handler = WebhookHandler(channel_secret=LINE_ACCESS_SECRET)
 
 def callback(request):
-    # リクエストヘッダーから署名検証のための値を取得
-    signature = request.headers['HTTP_X_LINE_SIGNATURE']
-    # リクエストボディを取得
-    body = request.body.decode('utf-8')
+    body = body = request.body.decode('utf-8')
+    hash = hmac.new(LINE_ACCESS_SECRET.encode('utf-8'),
+        body.encode('utf-8'), hashlib.sha256).digest()
     try:
-        # 署名を検証し、問題なければhandleに定義されている関数を呼び出す
-        handler.handle(body, signature)
+        signature = base64.b64encode(hash)
     except InvalidSignatureError:
         HttpResponseForbidden()
     # handleの処理を終えればOK
