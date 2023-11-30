@@ -4,7 +4,7 @@ from pathlib import Path
 
 from linebot.exceptions import InvalidSignatureError
 from linebot import LineBotApi, WebhookHandler
-
+import os
 from linebot.models import (
     MessageEvent,
     TextMessage ,ImageMessage, AudioMessage
@@ -17,11 +17,12 @@ environ.Env.read_env(Path.joinpath(BASE_DIR, '.env'))
 ACCESSTOKEN = env('ACCESSTOKEN')
 LINE_ACCESS_SECRET = env('LINE_ACCESS_SECRET')
 line_bot_api = LineBotApi(channel_access_token=ACCESSTOKEN)
+
 handler = WebhookHandler(channel_secret=LINE_ACCESS_SECRET)
 
 def callback(request):
     # リクエストヘッダーから署名検証のための値を取得
-    signature = request.META['HTTP_X_LINE_SIGNATURE']
+    signature = request.headers['HTTP_X_LINE_SIGNATURE']
     # リクエストボディを取得
     body = request.body.decode('utf-8')
     try:
