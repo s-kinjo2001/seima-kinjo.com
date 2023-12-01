@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import environ
 from pathlib import Path
 from linebot import LineBotApi
-from linebot.models import MessageEvent, TextMessage, ImageMessage, PostbackEvent, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, ImageMessage, PostbackEvent, TextSendMessage, VideoSendMessage
 from datetime import datetime, date
 
 BASE_DIR = Path(__file__).resolve().parent.parent

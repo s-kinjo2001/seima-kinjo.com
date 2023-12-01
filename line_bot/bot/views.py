@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from linebot.exceptions import InvalidSignatureError
 from linebot import LineBotApi, WebhookHandler
 
-from linebot.models import MessageEvent, TextMessage, ImageMessage, PostbackEvent, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, ImageMessage, PostbackEvent, TextSendMessage, VideoSendMessage
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
@@ -33,7 +33,8 @@ def callback(request):
 # かつテキストメッセージの場合
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="え？🐢")
-    )
+    if event.message.text == "クリスマス" or event.message.text == "xmas":
+        line_bot_api.reply_message(
+            event.reply_token,
+            VideoSendMessage(original_content_url="bot/static/bot/video/xmas-video-01.mp4")
+        )
