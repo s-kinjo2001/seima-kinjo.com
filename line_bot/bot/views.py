@@ -36,5 +36,6 @@ def handle_text_message(event):
     if event.message.text == "クリスマス" or event.message.text == "xmas":
         line_bot_api.reply_message(
             event.reply_token,
-            VideoSendMessage(original_content_url="https://seima-kinjo.com:10443/static/bot/video/xmas-video-01.mp4")
+            VideoSendMessage(original_content_url="https://seima-kinjo.com:10443/static/bot/video/xmas-video-01.mp4",
+                    preview_image_url="https://seima-kinjo.com:10443/static/bot/img/xmas-thumbnail-01.jpg")
         )
