@@ -33,8 +33,9 @@ MIDDLEWARE = [
 ]
 
 PUBLIC_PATHS = [
-	'accounts/login/',
+	'/accounts/login/',
     '/admin/',
+    ''
 ]
 ROOT_URLCONF = 'twitter.urls'
 
@@ -96,5 +97,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = ''
 LOGIN_REDIRECT_URL = '/home/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

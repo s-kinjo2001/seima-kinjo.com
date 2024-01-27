@@ -1,8 +1,29 @@
+{% load static %}
 <html>
-{% for tweet in tweets %}
-    {{ tweet.user_id.name }} {{ tweet.user_id.username }} {{ tweet.tweeted_at|date:"G時i分 Y年n月j日" }}<br>
-    {{ tweet.content }}<br>
-    いいね{{ tweet.num_likes }} リツイート0<br><br>
-{% endfor %}
-{{ likes }}
+    <head>
+        <link rel="stylesheet" href="{% static 'sns/css/index.css' %}">
+    </head>
+<body>
+    <input type="text">
+    <button>ツイート</button>
+
+    <ul>
+    {% for tweet in tweets %}
+        <li>
+            <div class="inline-block name">{{ tweet.user_id.name }}</div>
+            <div class="inline-block date" >{{ tweet.user_id.username }} {{ tweet.tweeted_at|date:"G時i分 Y年n月j日" }}</div>
+            <p class="content">{{ tweet.content }}</p>
+            <div class="favrt">
+                <p>いいね&nbsp;{{ tweet.num_likes }}&nbsp;&nbsp;&nbsp;&nbsp;リツイート&nbsp;{{ tweet.num_retweets }}</p>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+            <input type="submit" value="logout" />
+    </form>
+</body>
+
 </html>
