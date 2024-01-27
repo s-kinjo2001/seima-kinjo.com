@@ -1,0 +1,8 @@
+<html>
+{% for tweet in tweets %}
+    {{ tweet.user_id.name }} {{ tweet.user_id.username }} {{ tweet.tweeted_at|date:"G時i分 Y年n月j日" }}<br>
+    {{ tweet.content }}<br>
+    いいね{{ tweet.num_likes }} リツイート0<br><br>
+{% endfor %}
+{{ likes }}
+</html>

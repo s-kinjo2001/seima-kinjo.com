@@ -29,8 +29,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'global_login_required.GlobalLoginRequiredMiddleware',
 ]
 
+PUBLIC_PATHS = [
+	'accounts/login/',
+    '/admin/',
+]
 ROOT_URLCONF = 'twitter.urls'
 
 TEMPLATES = [
@@ -90,5 +95,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/home/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
